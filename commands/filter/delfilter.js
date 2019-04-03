@@ -6,12 +6,12 @@ class DelFilterCommand extends Command {
         let [name] = message.args;
         let filters = await message.guild.filters();
         name = name.toLowerCase();
-        if (!filters[name]) return await reply.fail("Filter dosn't exist.");
+        if (!filters[name]) return await reply.fail("Filtro não existe.");
 
         delete filters[name];
 
         await message.guild.filters(filters);
-        return reply.succ("Filter deleted.");
+        return reply.succ("Filtro eliminado.");
     }
 
     help = "Delete a filter.";
@@ -19,7 +19,7 @@ class DelFilterCommand extends Command {
     userPerms = ["MANAGE_GUILD"];
     arg = {
         type: "string",
-        info: "The name of this filter",
+        info: "O nome do filtro",
         max: "100",
         example: "badwords"
     };
