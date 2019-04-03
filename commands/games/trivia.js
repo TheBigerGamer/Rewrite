@@ -38,12 +38,12 @@ class TriviaCommand extends Command {
 
         snekfetch.get(genUrl(diff, cat)).then(response => {
             let res = response.body
-            if (res.response_code !== 0 || !res.results || !res.results[0]) return send("Api Error")
+            if (res.response_code !== 0 || !res.results || !res.results[0]) return send("Erro do Api")
             let trivia = res.results[0]
             if (!trivia.question ||
                 !trivia.correct_answer ||
                 !trivia.difficulty ||
-                !trivia.category) return send("Api Error")
+                !trivia.category) return send("Erro do Api")
 
             trivia.worth = {
                 "easy": 20,
@@ -55,22 +55,22 @@ class TriviaCommand extends Command {
 
         }).catch(e => {
             console.log(e)
-            return send("Api Error")
+            return send("Erro do Api")
         })
     }
 
-            help = "Play trivia";
+            help = "Joga trivia";
             usage = "{}trivia <difficulty> <category> eg. {}trivia medium geography";
             alias = ["quiz"];
             args = [{
                 type: "selection",
-                info: "What difficulty?",
+                info: "QUe dificuldade?",
                 example: "medium",
                 items: ["easy", "medium", "hard", "random"],
                 default: "random"
             }, {
                 type: "selection",
-                info: "Which category?",
+                info: "Que categoria?",
                 example: "geography",
                 items: [...Object.keys(categories), "random"],
                 default: "random"
@@ -80,7 +80,7 @@ class TriviaCommand extends Command {
 module.exports = TriviaCommand;
 
 async function play(message, bot, send, trivia) {
-    if (message.channel.cache.exists("trivia")) return send("A game is already in progress");
+    if (message.channel.cache.exists("trivia")) return send("Um jogo já está a decorrer");
     message.channel.cache.set("trivia");
     let {
         question,
@@ -96,12 +96,12 @@ async function play(message, bot, send, trivia) {
     incorrect_answers = shuffle(incorrect_answers);
     let embed = new bot.Embed()
     embed.title = "`Trivia`"
-    embed.addField("Category", category)
-        .addField("Difficulty", difficulty)
-        .addField("Reward", worth + ":dollar:")
-        .addField("Question", h2p(question))
-        .addField("Choices", "**" + incorrect_answers.map((k, i) => (i + 1) + ". " + k).join(" - ") + "**")
-        .setFooter("You have 20 seconds to answer. Answer using the corresponding number, you get one try.")
+    embed.addField("Categoria", category)
+        .addField("Dificuldade", difficulty)
+        .addField("Recompensa", worth + ":dollar:")
+        .addField("Questão", h2p(question))
+        .addField("Escolhas", "**" + incorrect_answers.map((k, i) => (i + 1) + ". " + k).join(" - ") + "**")
+        .setFooter("Tens 20 segundos para responder. Responde utilizando um número, tens uma tentativa.")
         .setColor("#4DD0D9")
         .setAuthor(message.guild.name, message.guild.iconURL)
 
@@ -114,7 +114,7 @@ async function play(message, bot, send, trivia) {
         if (guessed[m.author.id]) return false;
         guessed[m.author.id] = true;
         if (checkAnswer(correct_answer, incorrect_answers, guess)) {
-            collector.stop("WINNED")
+            collector.stop("VENCIDO")
             win(bot, message, m.author, worth)
         } else {
             m.failReact();
@@ -125,17 +125,17 @@ async function play(message, bot, send, trivia) {
     collector.on("end", (c, reason) => {
         message.channel.cache.delete("trivia");
         if (reason === "time") {
-            return send("**Noone guessed in time, the correct answer was: " + correct_answer + "**");
+            return send("**Ninguém adivinhou. A resposta correta era: " + correct_answer + "**");
         }
         if (reason === "wrong") {
-            return send("**Wrong! The correct answer was: " + correct_answer + "**");
+            return send("**ERROU! A resposta correta era: " + correct_answer + "**");
         }
     })
 }
 
 async function win(bot, message, user, worth) {
     message.channel.cache.delete("trivia");
-    message.channel.send(`**${user.tag} answered the question correctly, here is your reward.**`)
+    message.channel.send(`**${user.tag} acertou a questão corretamente, aqui está a tua recompensa.**`)
     await message.guild.triviaWin(user.id);
     await user.wallet.add(worth);
 }
