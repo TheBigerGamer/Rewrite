@@ -9,7 +9,7 @@ class UnflipCommand extends Command {
         await reply.edit("(°-°)\\ ┬─┬");
     }
 
-    help = "Unflips a table you just flipped";
+    help = "Regresso no tempo para a mesa que atiraste";
 }
 
 module.exports = UnflipCommand;
