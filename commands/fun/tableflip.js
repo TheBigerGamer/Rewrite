@@ -10,7 +10,7 @@ class TableFlipCommand extends Command {
         await msg.edit("(╯°□°)╯  ︵  ┻━┻");
     }
 
-    help = "Animated Table Flip";
+    help = "Table Flip Animado";
     cooldown = 3;
 }
 
