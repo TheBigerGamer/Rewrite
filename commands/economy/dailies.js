@@ -26,7 +26,7 @@ and click vote, you might need to login with your discord account.
 The reward is ${message.guild.formatBal(50)}.`);
         }
 
-        help = "Recieve daily rewards.";
+        help = "Recebe o teu prémio diário.";
         alias = ["dole"];
     }
 
