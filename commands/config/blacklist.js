@@ -14,7 +14,7 @@ class BlacklistCommand extends Command {
         await this.runSubCommand(sub);
     }
 
-    help = "Blacklist from usage of the bot";
+    help = "Blacklist para a utilização do bot";
     userPerm = "MANAGE_GUILD";
     alias = ["unblacklist", "whitelist"];
     arg = {
@@ -38,19 +38,19 @@ class BlackListUserCommand extends Command {
         if (bl[mem.user.id]) {
             delete bl[mem.user.id];
             await message.guild.blacklist(bl);
-            return await reply.succ("Unblacklisted user: ", mem.user.username);
+            return await reply.succ("Usuário retirado da Blacklist: ", mem.user.username);
         } else {
             bl[mem.user.id] = 1;
             await message.guild.blacklist(bl);
-            return await reply.succ("Blacklisted user: ", mem.user.username);
+            return await reply.succ("Usuário colocado na Blacklist: ", mem.user.username);
         }
     }
 
-    help = "Blacklist a user from running commands.";
+    help = "Coloca um usuário na Blacklist.";
     userPerm = "MANAGE_GUILD";
     arg = {
         type: "member",
-        info: "The user to blacklist",
+        info: "O usuário para a Blacklist",
         example: "@badboi",
     }
 }
@@ -63,19 +63,19 @@ class BlackListChannelCommand extends Command {
         if (bl[chan.id]) {
             delete bl[chan.id];
             await message.guild.blacklist(bl);
-            return reply.succ("Unblacklisted channel: ", chan.toString());
+            return reply.succ("Canal removido da Blacklist: ", chan.toString());
         } else {
             bl[chan.id] = 1;
             await message.guild.blacklist(bl);
-            return await reply.succ("Blacklisted channel: ", chan.toString());
+            return await reply.succ("Canal adicionado à Blacklist: ", chan.toString());
         }
     }
 
-    help = "Blacklist all commands from a channel.";
+    help = "Adiciona à Blacklist todos os comandos num canal.";
     userPerm = "MANAGE_GUILD";
     arg = {
         type: "channel",
-        info: "The channel to blacklist",
+        info: "O canal para a blacklist",
         example: "#nocommands",
     }
 }
@@ -86,25 +86,25 @@ class BlackListRoleCommand extends Command {
         const mem = message.member;
 
         if (roles.position >= mem.roles.highest.position)
-            return reply.warn("You cannot blacklist this role.");
+            return reply.warn("Não podes colocar este cargo na Blacklist.");
 
         const bl = await message.guild.blacklist();
         if (bl[role.id]) {
             delete bl[role.id];
             await message.guild.blacklist(bl);
-            return reply.succ("Unblacklisted role: ", role.name);
+            return reply.succ("Cargo adicionado à Blacklist: ", role.name);
         } else {
             bl[role.id] = 1;
             await message.guild.blacklist(bl);
-            return reply.succ("Blacklisted role: ", role.name);
+            return reply.succ("Cargo removido da Blacklist: ", role.name);
         }
     }
 
-    help = "Blacklist all commands from a role.";
+    help = "Adiciona à Blacklist todos os comandos de um cargo.";
     userPerm = "MANAGE_GUILD";
     arg = {
         type: "role",
-        info: "The role to blacklist",
+        info: "O cargo para adiciona à Blacklist",
         example: "@users",
     }
 }
