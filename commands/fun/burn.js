@@ -3,13 +3,13 @@ const { Command } = require("../../Nitro");
 class BurnCommand extends Command {
     async run ({message, bot, reply, t}) {
         const [user] = message.args;
-        reply(`**${message.author.username}** *burned* **${user.username}**\nYou need some ice for that bud? :snowflake:\nhttps://cdn.discordapp.com/attachments/186920285285384192/262348996784291840/image.gif`);
+        reply(`**${message.author.username}** *queimou* **${user.username}**\nPrecisas de algum gelo para esse player? :snowflake:\nhttps://4.bp.blogspot.com/-nNkz-s3K3d8/V1YemadBDWI/AAAAAAAAXJ0/dpWI9OFnjZkjIkCipgP4JXQlC69KloTpgCLcB/s1600/giphy.gif`);
     }
 
-    help = "Burn a user.";
+    help = "QUEIMA um utilizador.";
     args = [{
         type: "user",
-        info: "The user to burn.",
+        info: "O player para QUEIMAR.",
         example: "@Nerd"
     }]
 }
