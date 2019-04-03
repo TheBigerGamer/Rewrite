@@ -8,19 +8,19 @@ class RoleMeRolesCommand extends Command {
         let i = roles.indexOf(role.id)
         if (~i) {
             roles.splice(i);
-            reply.succ(`Removed \`${role.name}\` from roleme.`)
+            reply.succ(`Removido \`${role.name}\` do roleme.`)
         } else {
             roles.push(role.id);
-            reply.succ(`Added \`${role.name}\` to roleme.`)
+            reply.succ(`Adicionado \`${role.name}\` ao roleme.`)
         }
         return message.guild.rolemeroles(roles);
     }
 
-    help = "Edit the roles in roleme.";
+    help = "Edita os cargos no roleme.";
     userPerm = "MANAGE_GUILD";
     arg = {
         type: "role",
-        info: "Role to add or remove.",
+        info: "Altera para remover ou adicionar",
         example: "User"
     };
 }
