@@ -12,10 +12,10 @@ class AdviceCommand extends Command {
     }
 
     async error({reply}) {
-        return await reply.warn("Advice machine :b:roke");
+        return await reply.warn("A máquina de conselhos :regional_indicator_q:ebrou");
     }
 
-    help = "Advice for the soul.";
+    help = "Conselho para a alma.";
     cooldown = 5;
 }
 
