@@ -18,10 +18,10 @@ class EmojifyCommand extends Command {
         reply(emojied.join(""));
     }
 
-    help = "Emojify a message";
+    help = "Emojifica uma mensagem";
     args = [{
         type: "string",
-        info: "The message to emojify.",
+        info: "A mensagem para emojificar.",
         example: "1234"
     }]
 }
