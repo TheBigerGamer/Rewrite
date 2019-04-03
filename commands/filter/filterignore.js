@@ -13,7 +13,7 @@ class ExemptCommand extends Command {
         await this.runSubCommand(sub);
     }
 
-    help = "Exempt from filters.";
+    help = "Insentar um filtro.";
     userPerm = "MANAGE_GUILD";
     alias = "unexempt";
     args = {
@@ -29,16 +29,16 @@ class ExemptChannelCommand extends Command {
         const [_, filt, channel] = message.args;
 
         const filters = await message.guild.filters();
-        if (!filters[name]) return reply.warn(`Filter ${filt} does not exist`);
+        if (!filters[name]) return reply.warn(`Filtro ${filt} não existe`);
         const filter = filters[name];
         const exempt = filter.exempt;
 
         if (exempt[channel.id]) {
             delete exempt[channel.id];
-            reply.succ(`The filter ${filt} will no longer ignore: `, channel.toString());
+            reply.succ(`O filtro ${filt} não vai ser mais ignorar: `, channel.toString());
         } else {
             exempt[channel.id] = 1;
-            reply.succ(`The filter ${filt} will ignore: `, channel.toString());
+            reply.succ(`O filtro ${filt} vai ignorar: `, channel.toString());
         }
 
         filter.exempt = exempt;
@@ -46,15 +46,15 @@ class ExemptChannelCommand extends Command {
         return await message.guild.filters(filters);
     }
 
-    help = "Make filters ignore a channel.";
+    help = "Faz filtros ignorarem um canal.";
     args = [{
         type: "string",
-        info: "The filter to add the ignore.",
+        info: "O filtro para adicionar a ignorância.",
         example: "badwords"
     }, {
         type: "channel",
-        info: "The channel to be ignored by filters.",
-        example: "#advertisements",
+        info: "O canal para ser ignorado pelo filtro.",
+        example: "#anuncios",
         default: true
     }];
 }
@@ -64,16 +64,16 @@ class ExemptUserCommand extends Command {
         const [_, filt, user] = message.args;
 
         const filters = await message.guild.filters();
-        if (!filters[name]) return reply.warn(`Filter ${filt} does not exist`);
+        if (!filters[name]) return reply.warn(`Filtro ${filt} não existe`);
         const filter = filters[name];
         const exempt = filter.exempt;
 
         if (exempt[user.id]) {
             delete exempt[user.id];
-            reply.succ(`The filter ${filt} will no longer ignore: `, user.username);
+            reply.succ(`O filtro ${filt} não vai mais ignorar: `, user.username);
         } else {
             exempt[user.id] = 1;
-            reply.succ(`The filter ${filt} will ignore: `, user.username);
+            reply.succ(`O filtro ${filt} vai ignorar: `, user.username);
         }
 
         filter.exempt = exempt;
@@ -81,14 +81,14 @@ class ExemptUserCommand extends Command {
         return await message.guild.filters(filters);
     }
 
-    help = "Make filters ignore a channel.";
+    help = "Faz o filtro ignorar um utilizador.";
     args = [{
         type: "string",
-        info: "The filter to add the ignore.",
+        info: "O filtro para adicionar a ignorância.",
         example: "badwords"
     }, {
         type: "user",
-        info: "The user to be ignored by filters.",
+        info: "O utilizador para ser ignorado.",
         example: "@user",
         default: true
     }];
@@ -99,16 +99,16 @@ class ExemptRoleCommand extends Command {
         const [_, filt, role] = message.args;
 
         const filters = await message.guild.filters();
-        if (!filters[name]) return reply.warn(`Filter ${filt} does not exist`);
+        if (!filters[name]) return reply.warn(`O filtro ${filt} não existe`);
         const filter = filters[name];
         const exempt = filter.exempt;
 
         if (exempt[role.id]) {
             delete exempt[role.id];
-            reply.succ(`The filter ${filt} will no longer ignore: `, role.name);
+            reply.succ(`O filtro ${filt} não vai mais ignorar: `, role.name);
         } else {
             exempt[role.id] = 1;
-            reply.succ(`The filter ${filt} will ignore: `, role.name);
+            reply.succ(`O filtro ${filt} vai ignorar: `, role.name);
         }
 
         filter.exempt = exempt;
@@ -116,14 +116,14 @@ class ExemptRoleCommand extends Command {
         return await message.guild.filters(filters);
     }
 
-    help = "Make filters ignore a channel.";
+    help = "Faz um filtro ignorar um canal.";
     args = [{
         type: "string",
-        info: "The filter to add the ignore.",
+        info: "O filtro para ser adicionada a ignorância.",
         example: "badwords"
     }, {
         type: "user",
-        info: "The user to be ignored by filters.",
+        info: "O utilizador para ser ignorado pelo filtro.",
         example: "@user",
         default: true
     }];
