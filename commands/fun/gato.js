@@ -12,10 +12,10 @@ class CatCommand extends Command {
 
     async error({ message, bot, reply, t }, e) {
         logger.err(e);
-        reply.warn("API Request Failed")
+        reply.warn("API Request falhou")
     }
 
-    help = "Cats!";
+    help = "Gatos!";
 }
 
 module.exports = CatCommand;
