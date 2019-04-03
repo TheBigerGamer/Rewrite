@@ -8,15 +8,15 @@ class AutoRoleCommand extends Command {
         const autorole = await message.guild.ar();
         if (autorole || !role) {
             await message.guild.ar(false);
-            return await reply.succ("Disabled autorole.");
+            return await reply.succ("Autocargo desativado.");
         } else {
             const botMember = message.guild.member(
                 bot.user);
             if (botMember.roles.highest.position <= role.position)
-                return await reply.fail("The roles position is higher than mine, and I am unable to assign it to users.");
+                return await reply.fail("Este cargo é maior do que o meu. Nõ o consigo dar a outros usuários.");
 
             await message.guild.ar(role.id);
-            return await reply.succ("Autorole set to: ", role.name);
+            return await reply.succ("Autocargo defenido para: ", role.name);
         }
     }
 
@@ -26,7 +26,7 @@ class AutoRoleCommand extends Command {
     alias = "ar";
     arg = {
         type: "role",
-        info: "The role to auto assign to new members.",
+        info: "O cargo para dar automáticamente para usuários.",
         example: "@member",
         default: null
     }
