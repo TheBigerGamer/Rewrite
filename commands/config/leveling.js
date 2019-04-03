@@ -6,7 +6,7 @@ class LevelingCommand extends Command {
         send("test")
     }
 
-    help = "Enable leveling in your server.";
+    help = "Ativa o sistema de níveis no teu servidor.";
     wip = true;
 }
 
