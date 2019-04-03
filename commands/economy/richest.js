@@ -22,26 +22,26 @@ class RichestCommand extends Command {
         }
 
         const embed = bot.embed
-            .setTitle("Leaderboard " + f)
+            .setTitle("Top dos mais ricos " + f)
             .setDescription(userTxt.join("\n"))
-            .setFooter(`Page ${p}/${pages.pageCount} - $${total} in circulation`)
+            .setFooter(`Pagina ${p}/${pages.pageCount} - $${total} em circulação`)
             .nitroColor();
 
         reply(embed)
     }
 
-    help = "Get the richest users.";
+    help = "Top dos mais ricos.";
     cooldown = 10;
     alias = "moneyleaderboard";
     args = [{
             type: "int",
-            info: "The page number",
+            info: "O número da página",
             example: 1,
             default: 1
         },
         {
             type: "selection",
-            info: "`global` or `server` to filter.",
+            info: "`global` ou `server` para filtrar.",
             items: ["global", "server"],
             example: "global",
             default: "global"
