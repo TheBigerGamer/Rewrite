@@ -6,9 +6,9 @@ class EditFilterCommand extends Command {
         let [name, action, words] = message.args;
         const filters = await message.guild.filters();
 
-        if (!filters[name]) return await reply.warn("Filter does not exist");
+        if (!filters[name]) return await reply.warn("Filtro não existe");
         words = words.split(" ").filter(s => s != "").map(s => s.replace(/[^a-z]/gi, ''));
-        if (!words.length) return await reply.fail("No words resolved.");
+        if (!words.length) return await reply.fail("Nenhuma palavra foi reconhecida.");
 
         const filter = filters[name];
 
@@ -26,24 +26,24 @@ class EditFilterCommand extends Command {
         filters[name] = filter;
 
         await message.guild.filters(filters);
-        return await reply.succ(`Edited filter ${name}: `, filter.words.join(", "));
+        return await reply.succ(`Editado filtro ${name}: `, filter.words.join(", "));
     }
 
-    help = "Add or a remove a word from a filter.";
+    help = "Adiciona ou remove palavras de um filtro.";
     userPerms = ["MANAGE_GUILD"];
     args = [{
         type: "string",
-        info: "The name of a filter",
+        info: "O nome do filtro",
         example: "badwords",
         max: 100
     }, {
         type: "selection",
         items: ["add", "del"],
-        info: "`add` or `del` a word from a filter",
+        info: "`add` ou `del` uma palavra de um filtro",
         example: "add"
     }, {
         type: "string",
-        info: "Words to add or remove",
+        info: "Palavras para serem adicionadas ou removidas",
         example: "shoot heck",
     }];
 }
