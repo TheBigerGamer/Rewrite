@@ -4,24 +4,24 @@ class GiftCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const [user, am] = message.args;
-        if (user.id === message.author.id) return reply.fail("You can't give yourself money.");
-        if (user.bot) return reply.fail("Robots don't know how to handle money.");
-        if (!await message.author.wallet.hasEnough(am)) return reply.fail("You do not have enough money.");
+        if (user.id === message.author.id) return reply.fail("Não podes dar dinheiro a ti mesmo.");
+        if (user.bot) return reply.fail("Os BOTs não precisam de dinheiro.");
+        if (!await message.author.wallet.hasEnough(am)) return reply.fail("Tás pobre demais para isso, pá.");
         await message.author.wallet.sub(am);
         await user.wallet.add(am);
         const give = message.guild.formatBal(am);
         return reply(`**Gave ${give} to ${user.tag}**`);
     }
 
-    help = "Gift another user money.";
+    help = "Presenteia outro utilizador com dinheiro.";
     cooldown = 10;
     args = [{
         type: "user",
-        info: "The user to gift",
+        info: "O utilizador para dar dinheiro",
         example: "@user"
     }, {
         type: "int",
-        info: "The amount to give",
+        info: "A quantidade para dar",
         example: "100"
     }]
 }
