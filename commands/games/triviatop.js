@@ -25,19 +25,19 @@
 
          let embed = new bot.Embed();
          embed.description = txt.join("\n");
-         embed.setTitle("`Trivia Leaderboard`")
+         embed.setTitle("`Top do Trivia`")
              .setColor(embed.randomColor)
-             .setFooter(`Page ${pageNum}/${usersPaged.pages.length}`);
+             .setFooter(`Pagina ${pageNum}/${usersPaged.pages.length}`);
 
          reply({ embed });
      }
 
-     help = "The trivia leaderboard";
+     help = "O Top do Trivia";
      usage = "{}triviatop 2";
      alias = ["trivialeaderboard"];
      args = [{
          type: "int",
-         info: "The trivia leaderboard page.",
+         info: "A página do Top do Trivia.",
          default: 1,
          min: 1
      }]
