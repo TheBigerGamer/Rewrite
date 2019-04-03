@@ -11,7 +11,7 @@ class GitPullCommand extends Command {
         })
     }
 
-    help = "Update with the latest code";
+    help = "Faz o update com o código mais recente";
     userPerm = "DEV";
 }
 
