@@ -4,15 +4,15 @@ class PermissionsCommand extends Command {
 
     async run({ message, bot, send, t }) {
         let txt = `**Permissions**
-        Nitro uses the inbuilt discord permissions to handle command permissions
-        For example, to give a moderator permission to ban a user, simply give them the Ban Members permission.
-        Because of this, there is usually no need to setup the permissions, and normal users are unable to access destructive commands.
-        The permissions required for a command can be seen with \`${message.prefix}help cmd\``.unindent()
+        O Warlock usa as permissões de discórdia embutidas para lidar com permissões de comando
+        Por exemplo, para conceder permissão ao moderador para banir um usuário, simplesmente conceda a ele permissão para Banir Membros.
+        Por causa disso, normalmente não há necessidade de configurar as permissões e os usuários normais não podem acessar os comandos destrutivos.
+        As permissões necessárias para um comando podem ser vistas com \`${message.prefix}help cmd\``.unindent()
 
         send(txt)
     }
 
-    help = "Tutorial on Nitro's permission system.";
+    help = "Tutorial no sistema de permissões do Warlock";
     cooldown = 5
 }
 
