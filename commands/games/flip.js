@@ -4,15 +4,15 @@ class FlipCommand extends Command {
 
     async run ({message, bot, reply, t}) {
         if (Math.round(Math.random())) {
-            reply("**Heads! Here, keep it**");
+            reply("**Cara! Toma, guarda-a**");
             message.author.wallet.add(1);
         } else {
-            reply("**Tails. I'll take that coin back.**");
+            reply("**Coroa. Fico com a moeda.**");
             message.author.wallet.sub(1);
         }
     }
 
-    help = "Flip a coin";
+    help = "Atira uma moeda ao ar";
 }
 
 module.exports = FlipCommand;
