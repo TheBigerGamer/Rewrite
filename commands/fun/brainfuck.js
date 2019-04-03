@@ -5,7 +5,7 @@ class BrainfuckCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         if (message.channel.cache.exists("brainfuck"))
-            return await reply.warn("Something is already being interpreted in this channel.");
+            return await reply.warn("Algo já está a ser interpretado neste canal.");
 
         message.channel.cache.set("brainfuck");
         let bf = new Brainfuck(message);
@@ -20,7 +20,7 @@ class BrainfuckCommand extends Command {
         message.channel.cache.delete("brainfuck");
     }
 
-    help = "Brainfuck interpreter.";
+    help = "Brainfuck interpretador.";
     cooldown = 20;
     arg = {
         type: "string",
@@ -46,7 +46,7 @@ class Brainfuck {
         this.source = this.parseSource(txt);
         if (!this.source) throw "Invalid Source."
 
-        await this.message.send("Evaluating code. Type `quit` to quit");
+        await this.message.send("Avaliando código. Type `quit` para sair");
 
         this.awaitForceQuit();
         this.loopTimeout();
@@ -95,7 +95,7 @@ class Brainfuck {
     async awaitInput() {
         const filter = m => m.author.id === this.message.author.id,
             opts = { time: 10000, max: 1, maxMatches: 1 };
-        await this.message.reply("Awaiting input...");
+        await this.message.reply("Esperando entrada de código...");
         const col = await this.message.channel.awaitMessages(filter, opts);
 
         // Default, ended on time
@@ -144,7 +144,7 @@ class Brainfuck {
     loopTimer;
     loopTimeout() {
         this.loopTimer = setTimeout(() => {
-            this.message.reply("Infinite Loop Detected");
+            this.message.reply("Infinite Loop detetado");
             this.cursor = this.source.length;
         }, 120000);
     }
