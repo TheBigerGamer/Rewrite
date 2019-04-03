@@ -13,11 +13,11 @@ class BalanceCommand extends Command {
         return await reply(embed);
     }
 
-    help = "Shows your current balance";
+    help = "Mostra o teu saldo bancário";
     alias = ["money", "bal"];
     arg = {
         type: "user",
-        info: "The user to get the balance of.",
+        info: "O utilizador para ser mostrado o saldo.",
         example: "@richboi",
         default: true
     }
