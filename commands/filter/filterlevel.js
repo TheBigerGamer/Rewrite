@@ -7,23 +7,23 @@ class LevelFilterCommand extends Command {
 
         const filters = await message.guild.filters();
         let filter = filters[filt];
-        if (!filter) return reply.fail("Filter does not exist.");
+        if (!filter) return reply.fail("Filtro não existe.");
 
         filter.level = parseInt(lvl);
         filters[filt] = filter;
 
         await message.guild.filters(filters);
-        return reply.succ(`Set the filter ${filt} to level`, lvl);
+        return reply.succ(`Filtro ${filt} definido para o nível`, lvl);
     }
 
-    help = "Set the strictness of a filter.";
+    help = "Define a restrição de um filtro.";
     args = [{
         type: "string",
-        info: "The filter to set.",
+        info: "O filtro para defenir.",
         example: "badwords"
     }, {
         type: "selection",
-        info: "`1` - Only if the word directly matches, `2` - replaces lookalike characters, `3` - if the word is found anywhere.",
+        info: "`1` - Apenas palavras que correspondam exatamente, `2` - repõe caracteres que se assemelhem parcialmente, `3` - se a palavra é encontrada em qualquer lugar.",
         items: ["1", "2", "3"],
         example: "2"
     }]
