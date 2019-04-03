@@ -12,7 +12,7 @@ class LanguageCommand extends Command {
         } else return send(t.SETLANG_INVALID(message.suffix));
     }
 
-    help = "Set the locale.";
+    help = "Define a locale.";
     usage = "{}setlang en";
     userPerm = "MANAGE_GUILD";
     alias = ["language", "locale"];
