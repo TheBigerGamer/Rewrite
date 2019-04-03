@@ -26,15 +26,15 @@ class HelpCommand extends Command {
         const [c] = message.args;
         const cmd = c.toLowerCase();
         const command = commands[cmd];
-        if (!command) return await reply.fail("Invalid Command");
+        if (!command) return await reply.fail("Comando Inválido");
 
         const embed = bot.embed
             .setTitle(cmd)
             .setDescription(command.help)
             .nitroColor()
         command.alias.length <= 0 || embed.addField("Aliases", command.alias.join(", "));
-        command.userPerms.length <= 0 || embed.addField("User Perms", command.userPerms.map(p => PERMISSIONS[p]));
-        command.botPerms.length <= 0 || embed.addField("Bot Perms", command.botPerms.map(p => PERMISSIONS[p]));
+        command.userPerms.length <= 0 || embed.addField("Perms de Utilizador", command.userPerms.map(p => PERMISSIONS[p]));
+        command.botPerms.length <= 0 || embed.addField("Perms do Bot", command.botPerms.map(p => PERMISSIONS[p]));
 
         let usage = message.prefix + cmd;
 
@@ -48,16 +48,16 @@ class HelpCommand extends Command {
                 example += ` ${arg.example}`
             }
 
-            embed.addField("Usage", usage)
-                .addField("Arguments", argInfo.join("\n"))
-                .addField("Example", '`' + example + '`');
+            embed.addField("Utilização", usage)
+                .addField("Argumentos", argInfo.join("\n"))
+                .addField("Exemplo", '`' + example + '`');
 
-        } else embed.addField("Usage", usage);
+        } else embed.addField("Utilização", usage);
 
         return await reply(embed);
     }
 
-    help = "List all commands";
+    help = "Mostra todos os comandos";
     usage = "{}help or {}help <command>";
     dm = true;
     alias = ["commands", "cmds"];
