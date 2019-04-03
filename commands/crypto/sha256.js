@@ -9,10 +9,10 @@ class ShaCommand extends Command {
         reply(`${text} - ` + s);
     }
 
-    help = "Get the shasum of a string.";
+    help = "Obtem o shasum de uma frase.";
     arg = {
         type: "string",
-        info: "Text to hash.",
+        info: "Texto para encriptar.",
         example: "foobarbaz",
         max: 1000
     }
