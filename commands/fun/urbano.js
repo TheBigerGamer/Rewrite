@@ -14,11 +14,11 @@ class UrbanCommand extends Command {
         const embed = bot.embed
             .setTitle(`:book: ${info.word}`)
             .setURL(info.permalink)
-            .addField("Definition", info.definition)
-            .addField("Example Usage", info.example)
+            .addField("Definição", info.definition)
+            .addField("Examplo de Utilização", info.example)
             .addField("Tags", tags.join(", "))
-            .addField("Votes", `:thumbsup: ${info.thumbs_up} :thumbsdown: ${info.thumbs_down}`)
-            .addField("Author", info.author)
+            .addField("Votos", `:thumbsup: ${info.thumbs_up} :thumbsdown: ${info.thumbs_down}`)
+            .addField("Autor", info.author)
             .setFooter("Powered by Urban Dictionary")
             .setTimestamp(new Date(info.written_on))
             .nitroColor();
@@ -26,7 +26,7 @@ class UrbanCommand extends Command {
         reply(embed);
     }
 
-    help = "Search urban dictionary";
+    help = "Vê o urban dictionary";
     arg = {
         type: "string",
         info: "Search string",
