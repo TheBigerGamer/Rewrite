@@ -6,12 +6,12 @@ class SayCommand extends Command {
         reply(input);
     }
 
-    help = "Makes Nitro say a message";
+    help = "Faz o Warlock dizer algo";
     userPerm = "MANAGE_MESSAGES";
     alias = ["echo"];
     arg = {
         type: "string",
-        info: "What do you want Nitro to say?",
+        info: "O uqe é que queres que o Warlock diga?",
         example: "**ECHO**... **echo**... echo...",
     }
 }
