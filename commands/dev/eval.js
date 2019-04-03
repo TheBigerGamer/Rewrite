@@ -10,7 +10,7 @@ class EvalCommand extends Command {
     async run ({message, bot, reply, t}) {
         if (message.author.id !== FUNNBOT) return
         if (!message.checkSuffix) {
-            let txt = evalTxt("Funnbot", "Output", "100000", "An idiot who does not provide code when he evals.")
+            let txt = evalTxt("Funnbot", "Output", "100000", "Um idiota que não expecifica um código para executar.")
             return send(txt)
         }
         let processtime,
@@ -32,7 +32,7 @@ class EvalCommand extends Command {
         }
     }
 
-        help = "Eval some code";
+        help = "Executa (Avalia) um código";
         usage = "1+1";
         userPerms = ["DEV"];
         cooldown = 0;
@@ -54,7 +54,7 @@ ${a}\`\`\`
 :outbox_tray: **${b}:**
 \`\`\`${b === "Output" ? "js" : "prolog"}
 ${d}\`\`\`
-\`Execution Time: ${c}MS\``
+\`Tempo de execução: ${c}MS\``
 }
 
 let clean = (t) => {
