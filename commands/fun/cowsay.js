@@ -7,10 +7,10 @@ class CowsayCommand extends Command {
         reply("`\n." + '_'.repeat(input.length + 2) + "\n< " + input + " >\n " + '-'.repeat(input.length + 2) + "\n" + cow + "`");
     }
 
-    help = "Cowsay";
+    help = "A vaca diz";
     arg = {
         type: "string",
-        info: "What do you want the cow to say?",
+        info: "O que queres que a vaca diga?",
         example: "Meow!",
     }
 }
