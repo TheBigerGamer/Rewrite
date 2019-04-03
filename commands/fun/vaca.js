@@ -7,7 +7,7 @@ class CowCommand extends Command {
         reply("```\n" + cow + "```");
     }
 
-    help = "Random Ascii Cow";
+    help = "Vaca em Ascii aleatória";
 }
 
 module.exports = CowCommand;
