@@ -21,11 +21,11 @@ class MuteCommand extends Command {
         try {
             await member.roles.add(mutedRole, "nitro mute");
         } catch {
-            return reply.fail("Failed to mute user.");
+            return reply.fail("Falha ao silênciar utilizador.");
         }
         await guild.userAction(member.user.id, "mute", reason);
         await guild.modAction(message.author.id, "mute");
-        await reply.succ("Muted the user: ", member.user.tag);
+        await reply.succ("Silênciado o utilizador: ", member.user.tag);
 
         bot.conTimers.add({
             id: member.user.id,
@@ -46,21 +46,21 @@ class MuteCommand extends Command {
         })
     }
 
-    help = "Mute a user";
+    help = "Silêcia um utilizador";
     args = [{
         type: "member",
-        info: "The user to mute.",
+        info: "O utilizador a ser silênciado.",
         example: "@badboi"
     }, {
         type: "duration",
-        info: "The length of the mute.",
+        info: "A duração do silêncio.",
         example: "2h30m",
         min: TIME.min,
         max: TIME.day * 7
     }, {
         type: "string",
-        info: "The reason for muting",
-        example: "Being a bad boi.",
+        info: "A razão da silênciação",
+        example: "Ser um mau utilizador.",
         default: "unspecified"
     }]
 }
@@ -69,9 +69,9 @@ class MuteCommand extends Command {
  * @param {Guild} guild 
  */
 async function createMutedRole(guild) {
-    const role = await guild.roles.create({ name: "Muted", permissions: { SEND_MESSAGES: false } }, "nitro muted role");
+    const role = await guild.roles.create({ name: "Silênciado", permissions: { SEND_MESSAGES: false } }, "Warlock Silêncio");
     for (let channel in guild.channels.values()) {
-        await channel.updateOverwrite(role, { SEND_MESSAGES: false }, "nitro muted role");
+        await channel.updateOverwrite(role, { SEND_MESSAGES: false }, "Warlock Silêncio");
     }
     return role;2
 }
