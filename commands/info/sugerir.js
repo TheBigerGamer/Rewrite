@@ -16,19 +16,19 @@ class SuggestCommand extends Command {
             pos: "top",
             due: null,
             idList: TRELLO_LIST,
-            desc: "Suggester: " + tag
+            desc: "Sugestor: " + tag
         }
             
         trello.post("/1/cards", card, err => err ? logger.err(err) : 0);
 
-        reply.succ("Thank you for your suggestion!");
+        reply.succ("Obrigado pela sua sugestão!");
     }
 
-    help = "Suggest a feature for Nitro.";
+    help = "Sugere algo para o Warlock.";
     arg = {
         type: "string",
-        info: "The suggestion message.",
-        example: "Make it better.",
+        info: "A mensagem de sugestão.",
+        example: "Fa-lo melhor.",
         min: 5
     }
 }
