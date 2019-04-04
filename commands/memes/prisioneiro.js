@@ -14,12 +14,12 @@ class PrisonerCommand extends Command {
         return reply(await Image.out(main));
     }
 
-    help = "The prisoners on a bench meme.";
+    help = "Os prisioneiros num meme.";
     botPerm = "ATTACH_FILES";
     arg = {
         type: "string",
-        info: "The message for the prisoner.",
-        example: "I pirated a movie."
+        info: "A mensagem para o prisioneiro.",
+        example: "Eu piratiei um filme."
     }
     cooldown = 5;
 }
