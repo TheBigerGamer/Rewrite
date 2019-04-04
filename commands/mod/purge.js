@@ -22,7 +22,7 @@ class PurgeCommand extends Command {
         await this.runSubCommand(sub);
     }
 
-    help = "Purge messages.";
+    help = "Purga mensagens.";
     userPerm = "MANAGE_MESSAGES";
     botPerm = "MANAGE_MESSAGES";
     arg = {
@@ -37,7 +37,7 @@ class PurgeCommand extends Command {
 
 const IntArg = {
     type: "int",
-    info: "The amount of messages to collect.",
+    info: "O número de mensagens a recolher.",
     example: "100",
     min: 3,
     max: 100,
@@ -53,10 +53,10 @@ class PurgeNewUsersSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages sent by users less than days old";
+    help = "Purga mensagens enviadas por utilizadores há menos tempo que dias.";
     args = [{
         type: "int",
-        info: "Number of days old to be a new user.",
+        info: "Numero de dias para ser um novo utilizador.",
         example: "1",
         min: 1,
         max: 7,
@@ -71,10 +71,10 @@ class PurgeSmallSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages less than a certain length.";
+    help = "Purga mensagens menores que um certo comprimento.";
     args = [{
         type: "int",
-        info: "The maximum length of a message to purge",
+        info: "O máximo comprimento de uma mensagem para ser purgada",
         example: "5",
         min: 1,
         max: 500,
@@ -89,10 +89,10 @@ class PurgeLargeSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages greater than a certain length.";
+    help = "Purga mensagens maiores que um certo comprimento.";
     args = [{
         type: "int",
-        info: "The minimum length of a message to purge",
+        info: "O comprimento minimo para uma mensagem ser purgada",
         example: "1000",
         min: 500,
         max: 2000,
@@ -107,7 +107,7 @@ class PurgeEmbedsSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages that have a link embed"
+    help = "Purga mensagens que têm um embed linkado"
     arg = IntArg;
 }
 
@@ -119,7 +119,7 @@ class PurgeImagesSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages that have an attachment.";
+    help = "Purga mensagens que têm um anexo.";
     arg = IntArg;
 }
 
@@ -127,22 +127,22 @@ class PurgeChannelSubCommand extends Command {
     async run({ message, bot, reply, t }) {
         const [_, channel] = message.args;
 
-        await reply("**Are you sure you want to completely purge the channel " + channel.toString() + ", this will give the channel a new id, invites linked to this channel will be removed, and it is not reversible.** `yes/no`");
+        await reply("**Tens a certeza de que queres purgar as mensagens deste canal " + channel.toString() + ", isto vai dar ao canal um novo id, convites conectados a este canal vão ser removidos, e não é reversivél.** `sim/não`");
         const failsafe = await message.channel.collectMessage(message.author);
-        if (!failsafe) return await reply.edit("**Cancelled.**");
+        if (!failsafe) return await reply.edit("**Cancelado.**");
 
-        const clone = await channel.clone({ reason: "channel purge" });
+        const clone = await channel.clone({ reason: "canal purgado" });
         await channel.delete("channel purge");
 
-        clone.send("**Channel purged.**");
+        clone.send("**Canal purgado.**");
     }
 
-    help = "Clone and delete a channel to purge all of its messages.";
+    help = "Clona e elimina um canal para eliminar todas as suas mensagens.";
     userPerm = "MANAGE_CHANNELS";
     botPerm = "MANAGE_CHANNELS";
     arg = {
         type: "channel",
-        info: "The channel to purge.",
+        info: "O canal para ser purgado.",
         example: "#spam-channel",
         default: true
     }
@@ -156,10 +156,10 @@ class PurgeIdSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages sent by a user by their id";
+    help = "Purga mensagens enviadas por um utilizador pelo seu id";
     args = [{
         type: "id",
-        info: "The id of the user to purge.",
+        info: "O id do utilizador para purgar.",
         example: "359083453020635137"
     }, IntArg]
 }
@@ -172,10 +172,10 @@ class PurgeUserSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages sent by a user.";
+    help = "Purga mensagens enviadas por um utilizador.";
     args = [{
         type: "user",
-        info: "The user to purge.",
+        info: "O utilizador para ser purgado.",
         example: "@baduser"
     }, IntArg]
 }
@@ -188,10 +188,10 @@ class PurgeMatchSubCommand extends Command {
         return await purgeMessages(message.channel, filter, num);
     }
 
-    help = "Purge messages which match a string."
+    help = "Purga mensagens que coincidam com uma frase."
     args = [{
         type: "string",
-        info: "The string to match.",
+        info: "A frase para coincidir.",
         example: "badword"
     }, IntArg]
 }
@@ -201,10 +201,10 @@ class PurgeCountSubCommand extends Command {
         const [_, num] = message.args;
 
         await message.channel.bulkDelete(num, true);
-        await reply(`**Purged ${num} messages.**`);
+        await reply(`**Purgadas ${num} mensagens.**`);
     }
 
-    help = "Purge a number of messages.";
+    help = "Purga um número de mensagens.";
     arg = IntArg;
 }
 
@@ -214,7 +214,7 @@ async function purgeMessages(channel, filter, amount) {
     const filtered = sorted.filter(filter);
     const limited = filtered.array().slice(0, amount);
     await channel.bulkDelete(limited, true);
-    return await channel.send(`**Purged ${limited.length} messages.**`);
+    return await channel.send(`**Purgadas ${limited.length} mensagens.**`);
 }
 
 module.exports = PurgeCommand;
