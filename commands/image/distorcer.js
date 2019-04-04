@@ -9,12 +9,12 @@ class SwirlCommand extends Command {
         reply(Image.send(await Image.buffer(gm)));
     }
 
-    help = "Swirl an image.";
+    help = "Distorce uma imagem.";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
     arg = {
         type: "int",
-        info: "The swirl factor.",
+        info: "O fator de distorção.",
         min: 1,
         max: 720,
         endWithoutRest: true
