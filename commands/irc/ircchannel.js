@@ -8,18 +8,18 @@ class IRCChannelCommand extends Command {
 
         if (irc) {
             await channel.irc(false);
-            return await reply.succ("Disabled IRC in: ", channel.toString());
+            return await reply.succ("Desativado IRC em: ", channel.toString());
         } else {
             await channel.irc(true);
-            return await reply.succ("Enabled IRC in: ", channel.toString());
+            return await reply.succ("Ativado IRC em: ", channel.toString());
         }
     }
 
-    help = "Toggle a channel as open to IRC.";
+    help = "Altera se um canal está aberto a IRC.";
     userPerm = "MANAGE_GUILD";
     arg = {
         type: "channel",
-        info: "A channel to allow IRC messages.",
+        info: "Um canal para incluir mensagens IRC.",
         example: "#irc",
         default: true
     };
