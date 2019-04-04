@@ -9,7 +9,7 @@ class PingCommand extends Command {
         return await reply.edit(t.PING_DONE(ping, ws));
     }
 
-    help = "Check if Nitro is alive.";
+    help = "Vê se o Warlock ainda está vivo";
     userPerm = "ADMINISTRATOR";
 }
 
