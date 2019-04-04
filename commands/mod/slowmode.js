@@ -6,7 +6,7 @@ class SlowModeCommand extends Command {
         const [time, wait] = message.args;
         const chan = message.channel;
         if (!message.channel.permissionsFor(bot.user).has("MANAGE_ROLES"))
-            return await reply.fail("I need permission to manage permissions in this channel.");
+            return await reply.fail("Preciso de permissão para manusear cargos neste server.");
 
         const role = await createRole(chan);
         const col = handleUserMessages(chan, role, time, wait);
@@ -22,21 +22,21 @@ class SlowModeCommand extends Command {
             }
         })
 
-        return await reply(`**Slowmode enabled for ${time.toString()}.\nYou can only send a message every ${wait} seconds.\nModerators can type \`speedup\` to end early.**`);
+        return await reply(`**Slowmode ativado para ${time.toString()}.\nPodes enviar uma mensagem em cada ${wait} segundos.\nModeradores podem escrever \`speedup\` para acabar mais cedo.**`);
     }
 
-    help = "Slowdown chat.";
+    help = "Ativa o Slowdown em um canal.";
     userPerm = "MANAGE_GUILD";
     botPerm = "MANAGE_ROLES";
     args = [{
         type: "duration",
-        info: "The duration of the slowdown",
+        info: "A duração do slowdown",
         example: "10m",
         min: 10 * TIME.second,
         max: 10 * TIME.day
     }, {
         type: "number",
-        info: "The number of seconds between each message.",
+        info: "O número de segundos entre cada mensagem.",
         example: "12",
         min: 5,
         max: 20,
@@ -45,10 +45,10 @@ class SlowModeCommand extends Command {
 }
 
 function endSlowmode(chan, col, unlock, role, endTimer) {
-    chan.send("**Slowmode has ended.**");
+    chan.send("**Slowmode terminou.**");
     col.stop();
     unlock.stop();
-    role.delete("nitro-slowmode");
+    role.delete("warlock-slowmode");
     if (endTimer) clearTimeout(endTimer);
 }
 
@@ -63,9 +63,9 @@ function handleUserMessages(channel, role, time, wait) {
     const col = channel.createMessageCollector(filter, { time: time.milliseconds() });
     col.on("collect", async m => {
         const member = await m.guild.members.fetch(m.author);
-        member.roles.add(role, "nitro-slowmode in " + channel.id);
+        member.roles.add(role, "warlock-slowmode em " + channel.id);
         setTimeout(() => {
-            member.roles.remove(role, "nitro-slowmode in " + channel.id);
+            member.roles.remove(role, "warlock-slowmode em " + channel.id);
         }, wait * 1000);
     });
     return col;
@@ -77,11 +77,11 @@ async function createRole(channel) {
         data: {
             name: "slowmode-" + channel.id,
         },
-        reason: "nitro-slowmode in " + channel.id,
+        reason: "warlock-slowmode em " + channel.id,
     });
     await channel.updateOverwrite(role, {
         SEND_MESSAGES: false
-    }, 'Nitro slowdown in ' + channel.id);
+    }, 'Warlock slowdown em ' + channel.id);
     return role;
 }
 
