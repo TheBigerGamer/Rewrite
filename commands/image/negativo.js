@@ -9,7 +9,7 @@ class SwirlCommand extends Command {
         reply(Image.send(await Image.gmBuffer(gm)));
     }
 
-    help = "The negative of an image.";
+    help = "O negativo de uma imagem.";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
 }
