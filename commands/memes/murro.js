@@ -23,15 +23,15 @@ class PunchCommand extends Command {
         ctx.rotate(30 * Math.PI / 180);
         const file = Image.send(canvas.toBuffer());
 
-        return reply(`**${message.author.username}** *sucker punches* **${user.username}**`, file);
+        return reply(`**${message.author.username}** *esmurrou * **${user.username}**`, file);
     }
 
-    help = "Sucker punch a user";
+    help = "Esmurra um utilizador";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
     arg = {
         type: "user",
-        info: "The user to punch.",
+        info: "O utilizador para esmurrar.",
         example: "@user"
     }
 }
