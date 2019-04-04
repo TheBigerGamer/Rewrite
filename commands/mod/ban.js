@@ -4,22 +4,22 @@ class BanCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const [member, reason] = message.args;
-        if (!member.bannable) return await reply.fail("I lack permission to ban this user.");
-        if (message.member.roles.highest.position <= member.roles.highest.position) return await reply.fail("You lack permission to ban this user.");
+        if (!member.bannable) return await reply.fail("Não tenho permissões para banir este utilizador.");
+        if (message.member.roles.highest.position <= member.roles.highest.position) return await reply.fail("Não tens permissões para banir este utilizador.");
 
-        let txt = `Are you sure you want to ban the user ${member.user.tag}`;
+        let txt = `De certeza que queres banir este utilizador ${member.user.tag}`;
         const m = await message.channel.ask(message.author, txt);
         const failsafe = await message.channel.collectMessage(message.author);
-        if (!failsafe) return await m.edit("**Aborted.**", { embed: null });
-        else await m.edit(`**Banning...**`, { embed: null });
+        if (!failsafe) return await m.edit("**Abortado.**", { embed: null });
+        else await m.edit(`**Banindo...**`, { embed: null });
         try {
             await message.guild.members.ban(member, { reason, days: 1 });
         } catch (e) {
-            return await m.edit("**Ban failed**");
+            return await m.edit("**Ban falhou**");
         }
         await message.guild.userAction(member.user.id, "ban", reason);
         await message.guild.modAction(message.author.id, "ban");
-        await m.edit("**User banned**");
+        await m.edit("**Utilizador banido**");
 
         const modlogID = await message.guild.modlog();
         const modlog = bot.channels.get(modlogID);
@@ -31,18 +31,18 @@ class BanCommand extends Command {
         });
     }
 
-    help = "Ban a member.";
+    help = "Ban um membro.";
     alias = ["banne", "b&"];
     botPerms = ["BAN_MEMBERS"];
     userPerms = ["BAN_MEMBERS"];
     args = [{
         type: "member",
-        info: "The user to ban.",
+        info: "O utilizador para banir.",
         example: "@Badboy"
     }, {
         type: "string",
-        info: "The reason for banning.",
-        example: "Because I said so",
+        info: "A razão do ban.",
+        example: "Porque sim",
         default: "unspecified"
     }];
 }
