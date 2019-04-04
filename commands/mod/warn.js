@@ -4,10 +4,10 @@ class WarnCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const [user, reason] = message.args;
-        let txt = `**You have been warned in ${message.guild.name}**\n\n${reason !== "unspecified" ? `**Reason:** ${reason}` : 0}`;
+        let txt = `**Foste avisado em ${message.guild.name}**\n\n${reason !== "não especificado" ? `**Rasão:** ${reason}` : 0}`;
         try {
             await user.send(txt);
-            reply.succ(`${user.tag} has been warned.`);
+            reply.succ(`${user.tag} foi avisado.`);
         } catch {
             reply(`${user}, ${txt}`);
         }
@@ -25,16 +25,16 @@ class WarnCommand extends Command {
         });
     }
 
-    help = "Warn a user.";
+    help = "Avisa um utilizador.";
     userPerms = ["MANAGE_MESSAGES"];
     args = [{
         type: "user",
-        info: "The user to warn.",
+        info: "O utilizador para avisar.",
         example: "@Badboy"
     }, {
         type: "string",
-        info: "The reason for warning.",
-        example: "Watch yourself.",
+        info: "A razão do aviso.",
+        example: "Vê-te a ti mesmo.",
         default: "unspecified"
     }];
 }
