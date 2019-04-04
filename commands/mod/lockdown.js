@@ -12,11 +12,11 @@ class LockDownCommand extends Command {
         else if (overwrites.denied.has("SEND_MESSAGES")) current = false;
 
         await message.channel.overwritePermissions(role, { SEND_MESSAGES: false });
-        await reply.warn(`Channel locked down for ${ms.toString()}.`, ' type `unlock` to end the lockdown.');
+        await reply.warn(`Canal bloqueado porque ${ms.toString()}.`, ' digita `unlock` para terminar o lockdown.');
 
         async function end() {
             await message.channel.overwritePermissions(role, { SEND_MESSAGES: current });
-            await reply.succ("Lockdown has ended.");
+            await reply.succ("Lockdown terminou.");
             c.stop();
         }
 
@@ -33,18 +33,18 @@ class LockDownCommand extends Command {
         });
     }
 
-    help = "Lockdown the channel.";
+    help = "Faz um canal entrar em lockdown.";
     userPerms = ["MANAGE_CHANNELS"];
     botPerms = ["MANAGE_CHANNELS"];
     args = [{
         type: "duration",
-        info: "The amount of time to lockdown for.",
+        info: "A duração do lockdown.",
         example: "2m30s",
         min: 1000,
         max: 36e6
     }, {
         type: "role",
-        info: "Optional role to lockdown, instead of everyone",
+        info: "Cargo opcional do lockdown, em vez do @everyone",
         example: "@Users",
         default: null
     }];
