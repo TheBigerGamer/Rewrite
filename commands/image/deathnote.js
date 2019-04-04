@@ -13,15 +13,15 @@ class DeathNoteCommand extends Command {
         ctx.fillText(user.username, 275, 80);
         const file = Image.send(canvas.toBuffer());
 
-        return reply(`**${message.author.username}** *has added* **${user.username}** *to their death note*`, file);
+        return reply(`**${message.author.username}** *adicionou* **${user.username}** *ao seu death note*`, file);
     }
 
-    help = "Put someone on your death note";
+    help = "Põe alguém no teu death note";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
     arg = {
         type: "user",
-        info: "The user to add.",
+        info: "O utlilizador para adicionar.",
         example: "@user"
     }
 }
