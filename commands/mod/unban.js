@@ -9,15 +9,15 @@ class UnbanCommand extends Command {
         const [user, err] = findMember(search, bans);
         if (err) return reply.fail(err);
 
-        let txt = `Are you sure you want to unban the user ${user.tag}`;
+        let txt = `Tens a certeza de que queres desbanir o utilizador ${user.tag}`;
         const m = await message.channel.ask(message.author, txt);
         const failsafe = await message.channel.collectMessage(message.author);
-        if (!failsafe) return await m.edit("**Aborted.**", { embed: null });
-        else await m.edit(`**Unbanning...**`, { embed: null });
+        if (!failsafe) return await m.edit("**Abortado.**", { embed: null });
+        else await m.edit(`**Desbanindo...**`, { embed: null });
         try {
             await message.guild.members.unban(user, reason);
         } catch (e) {
-            return await m.edit("**Unban failed**");
+            return await m.edit("**Deban falhou**");
         }
         await message.guild.userAction(user.id, "unban", reason);
         await message.guild.modAction(message.author.id, "unban");
@@ -33,30 +33,30 @@ class UnbanCommand extends Command {
         });
     }
 
-    help = "Unban a user.";
+    help = "Desbane um utilizador.";
     userPerm = "BAN_MEMBERS";
     args = [{
         type: "string",
-        info: "A user or id to unban.",
+        info: "O utilizador ou o seu id para desbanir.",
         example: "goodboinow"
     }, {
         type: "string",
-        info: "The reason for unbanning.",
-        example: "He is good now.",
+        info: "A razão para desbanir.",
+        example: "É bom agora.",
         default: "unspecified"
     }]
 }
 
 function findMember(search, bans) {
     let exactMems = bans.filter(memberFilterExact(search));
-    if (exactMems.size > 1) return [false, `${exactMems.size} bans found, please specify.`];
+    if (exactMems.size > 1) return [false, `${exactMems.size} bans encontrados, por favor especifica.`];
     if (exactMems.size === 1) return [exactMems.first().user, null];
 
     let mems = bans.filter(memberFilterInexact(search));
-    if (mems.size > 1) return [false, `${mems.size} bans found, please specify.`];
+    if (mems.size > 1) return [false, `${mems.size} bans encontrados, por favor especifica.`];
     if (mems.size === 1) return [mems.first().user, null];
 
-    return [null, "No bans found with the name `" + search + "`"];
+    return [null, "Não foram encontrados bans com esse nome `" + search + "`"];
 }
 
 function memberFilterExact(search) {
