@@ -35,15 +35,15 @@ class ShipCommand extends Command {
         return reply(await Image.out(out));
     }
 
-    help = "Ship a user";
+    help = "Envia um utilizador";
     botPerm = "ATTACH_FILES";
     args = [{
         type: "user",
-        info: "The user to ship",
+        info: "O utilizador a ser enviado",
         example: "@user"
     }, {
         type: "user",
-        info: "The other user to ship",
+        info: "Outro utilizador a ser enviado",
         example: "@user",
         default: true
     }]
