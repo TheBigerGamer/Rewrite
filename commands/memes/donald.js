@@ -15,12 +15,12 @@ class DonaldCommand extends Command {
         reply(`https://twitter.moc/realDonaldTrump/status/${message.id}`, embed);
     }
 
-    help = "Tweet like the Donald.";
+    help = "Tweeta como o Donald.";
     botPerm = "EMBED_LINKS"
     arg = {
         type: "string",
-        info: "The message in the tweet",
-        example: "My IQ is one of the highest.",
+        info: "A mensagem no tweet",
+        example: "O meu QI é um dos maiores.",
         min: 1,
         max: 2000
     }
