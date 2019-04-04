@@ -4,9 +4,9 @@ const { Image } = require("../../Nitro");
 
 class CreateCardCommand extends Command {
     async run({ message, bot, reply, t }) {
-        if (!message.args[0]) return reply.warn("To create a card: " + prefix + "createcard This text is on the question card | this text is on the anwser card");
+        if (!message.args[0]) return reply.warn("Para criar um cartão: " + prefix + "createcard Texto para o cartão de pergunta | este texto é para o carão de resposta");
         let text = message.suffix.split("|");
-        if (!text[1]) return reply.fail("Please include text for the second card, and the delimeter `|`");
+        if (!text[1]) return reply.fail("Inclui um texto para o segundo cartão, e delimita-o `|`");
 
         const buf = Image.getStaticFile("cah");
         jimp.read(buf, async (err, img) => {
@@ -23,7 +23,7 @@ class CreateCardCommand extends Command {
         })
     }
 
-    help = "Design your own cards against humanity card..";
+    help = "Faz os teus próprios cartões contra os cartões da humanidade...";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
 }
