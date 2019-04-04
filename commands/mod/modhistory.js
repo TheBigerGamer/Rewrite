@@ -6,9 +6,9 @@ class ModHistoryCommand extends Command {
         const userData = await message.guild.userData();
         const data = userData[user.id] || {};
         const mem = data.mod;
-        if (!mem) return reply.fail("There is no history for this moderator.");
+        if (!mem) return reply.fail("Não há nada no histórico deste utilizador.");
         const embed = bot.embed
-            .setTitle("Mod History")
+            .setTitle("Histórico do Mod")
             .setAuthor(user.tag, user.avatarURL())
             .nitroColor();
         for (let [action, am] of Object.entries(mem)) {
@@ -18,11 +18,11 @@ class ModHistoryCommand extends Command {
         reply(embed);
     }
 
-    help = "The actions by a moderator.";
+    help = "As ações do moderador.";
     alias = "modh";
     arg = {
         type: "user",
-        info: "The moderator to get the actions for.",
+        info: "O moderador para obter as suas ações.",
         example: "@modboi",
         default: true
     }
