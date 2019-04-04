@@ -12,13 +12,13 @@ class PlayCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const vc = message.member.voiceChannel;
-        if (!vc) return reply.warn("Join a voice channel to queue music.");
+        if (!vc) return reply.warn("Entra num canal de música para ouvires música.");
 
         const [sub] = message.args;
         this.runSubCommand(sub);
     }
 
-    help = "Play a song";
+    help = "Põe uma música a tocar";
     alias = "join";
     cooldown = 10;
     arg = {
@@ -41,13 +41,13 @@ class SearchListCommand extends Command {
         try {
             var trackData = await player.search("ytsearch: " + query);
         } catch {
-            return reply.warn("Search returned 0 results.");
+            return reply.warn("Pesquisa revelou 0 resultados.");
         }
 
         const items = trackData.slice(0, 5);
         const embed = bot.embed
-            .setTitle("Youtube Search")
-            .setFooter("Select a track by its number or cancel.")
+            .setTitle("Pesquisa no Youtube")
+            .setFooter("Seleciona uma faixa pelo seu número.")
             .nitroColor()
         items.forEach((item, i) => {
             embed.addBetterField(i + 1, `[${item.title}](${item.url})`);
@@ -59,23 +59,23 @@ class SearchListCommand extends Command {
             const col = await message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ["time"] });
             var num = parseInt(col.first().content) || null;
         } catch {
-            return reply.edit("**Cancelled.**", { embed: null });
+            return reply.edit("**Cancelado.**", { embed: null });
         }
 
         if (!num || num < 1 || num > items.length)
-            return reply.edit("**Cancelled.**", { embed: null });
+            return reply.edit("**Cancelado.**", { embed: null });
 
         let track = items[num - 1];
         player.queueTrack(track);
         return reply.edit(formatMessage(track, message.author));
     }
 
-    help = "Search youtube and choose from a list."
+    help = "Pesquisa no YouTube e escolhe numa lista."
     arg = {
         type: "string",
         typeText: "query",
-        info: "The search term.",
-        example: "Never gonna give you up.",
+        info: "O termo de pesquisa.",
+        example: "High Hopes.",
         max: 200
     }
 }
@@ -93,18 +93,18 @@ class YTSearchCommand extends Command {
         try {
             var trackData = await player.playSearch("ytsearch: " + query);
         } catch {
-            return reply.warn("No tracks found.");
+            return reply.warn("Não foram encontradas faixas.");
         }
 
         return reply(formatMessage(trackData, message.author));
     }
 
-    help = "Search youtube for a video.";
+    help = "Pesquisa no YouTube.";
     arg = {
         type: "string",
         typeText: "query",
-        info: "The search term.",
-        example: "Never gonna give you up.",
+        info: "O termo de pesquisa.",
+        example: "High Hospes.",
         max: 200
     }
 }
@@ -122,18 +122,18 @@ class SCSearchCommand extends Command {
         try {
             var trackData = await player.playSearch("scsearch: " + query);
         } catch {
-            return reply.warn("No tracks found.");
+            return reply.warn("Não foram encontradas aixas.");
         }
 
         return reply(formatMessage(trackData, message.author));
     }
 
-    help = "Search soundcloud for a track.";
+    help = "Pesquisa a SoundCloud por músicas.";
     arg = {
         type: "string",
         typeText: "query",
-        info: "The search term.",
-        example: "Never gonna give you up.",
+        info: "O termo de pesquisa.",
+        example: "Hight Hopes.",
         max: 200
     }
 }
@@ -151,18 +151,18 @@ class LinkCommand extends Command {
         try {
             var trackData = await player.playLink(query);
         } catch {
-            return reply.warn("No tracks found.");
+            return reply.warn("Não foram encontradas faixas.");
         }
 
         return reply(formatMessage(trackData, message.author));
     }
 
-    help = "Play a link.";
+    help = "Põe um link a tocar..";
     arg = {
         type: "string",
         typeText: "link",
-        info: "The link to play.",
-        example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        info: "O link para tocar.",
+        example: "https://www.youtube.com/watch?v=xNu4oHPULQQ",
         max: 1000
     }
 }
