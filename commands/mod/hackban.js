@@ -5,19 +5,19 @@ class HackBanCommand extends Command {
     async run({ message, bot, reply, t }) {
         const [id, reason] = message.args;
 
-        let txt = `Are you sure you want to ban the id ${id}`;
+        let txt = `Tens a certeza que queres banir ${id}`;
         const m = await message.channel.ask(message.author, txt);
         const failsafe = await message.channel.collectMessage(message.author);
-        if (!failsafe) return await m.edit("**Aborted.**", { embed: null });
+        if (!failsafe) return await m.edit("**Abortado.**", { embed: null });
         else await m.edit(`**Banning...**`, { embed: null });
         try {
             await message.guild.members.ban(id, { reason, days: 1 });
         } catch (e) {
-            return await m.edit("**Ban failed**");
+            return await m.edit("**Ban falhou**");
         }
         await message.guild.userAction(id, "ban", reason);
         await message.guild.modAction(message.author.id, "ban");
-        await m.edit("**User banned**");
+        await m.edit("**Utilizador banido**");
 
         const modlogID = await message.guild.modlog();
         const modlog = bot.channels.get(modlogID);
@@ -29,17 +29,17 @@ class HackBanCommand extends Command {
         });
     }
 
-    help = "Ban a user by their ID if they are not on the server.";
+    help = "Ban um utilizador pelo seu ID se eles não estão no server.";
     botPerms = ["BAN_MEMBERS"];
     userPerms = ["BAN_MEMBERS"];
     args = [{
         type: "string",
-        info: "The id of a user",
+        info: "O id de um utilizador",
         example: "2640877062357701856",
     }, {
         type: "string",
-        info: "The reason for banning",
-        example: "They are a scammer",
+        info: "A razão do bam",
+        example: "H.A.C.K.E.R",
         default: "unspecified"
     }];
 }
