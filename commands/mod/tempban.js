@@ -4,22 +4,22 @@ class TempBanCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const [member, duration, reason] = message.args;
-        if (!member.bannable) return await reply.fail("I lack permission to tempban this user.");
-        if (message.member.roles.highest.position <= member.roles.highest.position) return await reply.fail("You lack permission to tempban this user.");
+        if (!member.bannable) return await reply.fail("Não tenho permissões para banir este utilizador temporáriamente.");
+        if (message.member.roles.highest.position <= member.roles.highest.position) return await reply.fail("Não tens permissões para banir este utilizador temporáriamente.");
 
         let txt = `Are you sure you want to tembban the user ${member.user.tag}`;
         const m = await message.channel.ask(message.author, txt);
         const failsafe = await message.channel.collectMessage(message.author);
-        if (!failsafe) return await m.edit("**Aborted.**", { embed: null });
-        else await m.edit(`**Tempbanning...**`, { embed: null });
+        if (!failsafe) return await m.edit("**Abortado.**", { embed: null });
+        else await m.edit(`**Banindo temporáriamente...**`, { embed: null });
         try {
             await member.ban({ reason });
         } catch (e) {
-            return await m.edit("**Tempban failed**");
+            return await m.edit("**Tempban falhou**");
         }
         await message.guild.userAction(member.user.id, "tempban", reason);
         await message.guild.modAction(message.author.id, "tempban");
-        await m.edit("**Tempban complete**");
+        await m.edit("**Ban temporário completo**");
 
         bot.conTimers.add({
             id: member.user.id,
@@ -40,23 +40,23 @@ class TempBanCommand extends Command {
     }
 
 
-    help = "Temporarily ban a user.";
+    help = "Bane temporáriamente um utilizador.";
     userPerms = ["BAN_MEMBERS"];
     botPerms = ["BAN_MEMBERS"];
     args = [{
         type: "member",
-        info: "The member to tempban.",
+        info: "O membro para ser banido temporáriamente.",
         example: "@Bodboi"
     }, {
         type: "duration",
-        info: "The length of the tempban.",
+        info: "A duração do ban.",
         example: "2h30m",
         min: 600000,
         max: 2592e5
     }, {
         type: "string",
-        info: "The reason for tempbanning.",
-        example: "Being a bad boy",
+        info: "A razão do ban temporário.",
+        example: "Ser mau",
         default: "unspecified"
     }];
 }
