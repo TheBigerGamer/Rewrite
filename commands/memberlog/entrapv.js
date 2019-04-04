@@ -4,19 +4,19 @@ class JoinDMCommand extends Command {
 
     async run ({message, bot, reply, t}) {
         const [m] = message.args;
-        if (m === "disable") {
+        if (m === "desativar") {
             await message.guild.mldm();
-            return reply.succ("JoinDM disabled.")
+            return reply.succ("EntraPV desativado.")
         }
         await message.guild.mldm(m);
         return reply.succ(`Users will be sent \`${m}\``);
     }
 
-    help = "Send a message when a user joins.";
+    help = "Envia uma mensagem quando o utilizador entra.";
     arg = {
         type: "string",
-        info: "The message to send, or `disable`",
-        example: "Welcome to the server."
+        info: "A mensagem para enviar ou `desativar`",
+        example: "Bem-vindo."
     }
 }
 
