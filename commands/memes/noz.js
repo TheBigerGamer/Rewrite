@@ -15,13 +15,13 @@ class NutCommand extends Command {
         reply(file);
     }
 
-    help = "The nut button meme";
+    help = "O meme do botão de noz";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
     arg = {
         type: "string",
-        info: "Text to put in the meme",
-        example: "When papi hitting it from behind and resolves your promise"
+        info: "O texto para por no meme",
+        example: "Alguma coisa que não interessa a ninguém."
     }
 }
 
