@@ -12,7 +12,7 @@ class JPEGCommand extends Command {
         return reply(await Image.out(sharp));
     }
 
-    help = "Jpegify an image.";
+    help = "Jpegifica uma imagem.";
     botPerm = "ATTACH_FILES";
     alias = "jpegify";
     cooldown = 5;
