@@ -6,10 +6,10 @@ class PlaylistCommand extends Command {
         const [num] = message.args;
 
         const vc = message.member.voiceChannel;
-        if (!vc) return reply.warn("Join a voice channel to run this command.");
+        if (!vc) return reply.warn("Entra num canal de voz para executar este comando.");
 
         const player = bot.player.check(vc);
-        if (!player) return reply.warn("There is no music playing.")
+        if (!player) return reply.warn("Não há música a tocar.")
 
         let playlist = player.playlistInfo(num);
 
@@ -17,20 +17,20 @@ class PlaylistCommand extends Command {
             .setTitle("Playlist")
             .nitroColor()
             .setFooter(`Page ${num}/${playlist.pageCount}`)
-            .addBetterField("Currently Playing", `[${playlist.nowPlaying.title}](${playlist.nowPlaying.url}) (${playlist.nowPlaying.length}) \n`);
+            .addBetterField("A tocar agora", `[${playlist.nowPlaying.title}](${playlist.nowPlaying.url}) (${playlist.nowPlaying.length}) \n`);
         for (let i = 0; i < playlist.tracks.length; i++) {
             let track = playlist.tracks[i];
             embed.addBetterField(track.index + 1, `[${track.title}](${track.url}) (${track.length})`);
         }
-        embed.addBetterField("Total Length", playlist.totalLength.toString(), true)
+        embed.addBetterField("Tempo total", playlist.totalLength.toString(), true)
 
         return reply(embed);
     }
 
-    help = "Get the current playlist.";
+    help = "Obtem a playlist atual.";
     arg = {
         type: "num",
-        info: "The playlist page number.",
+        info: "O número da página da playlist.",
         example: "1",
         min: 1,
         default: 1
