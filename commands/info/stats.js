@@ -6,15 +6,15 @@ const moment = require("moment");
 class StatsCommand extends Command {
 
     async run({ message, bot, reply, t }) {
-        if (!bot.stats) return await reply.warn("Something went wrong fetching stats.");
+        if (!bot.stats) return await reply.warn("Algo deu errado.");
         const s = await fetchStuff(bot);
-        if (!s) return await reply.warn("Something went wrong fetching stats.");
+        if (!s) return await reply.warn("Algo deu errado a tentar obter os stats.");
 
         const shards = "**```http\n" + [
-            `Count    :: ${s.SHARDCOUNT}`,
-            `Guilds    :: ${s.TOTAL_GUILDS}`,
-            `Channels  :: ${s.TOTAL_CHANNELS}`,
-            `Users     :: ${s.TOTAL_USERS}`
+            `Count            :: ${s.SHARDCOUNT}`,
+            `Servers          :: ${s.TOTAL_GUILDS}`,
+            `Canais           :: ${s.TOTAL_CHANNELS}`,
+            `Utilizadores     :: ${s.TOTAL_USERS}`
         ].join("\n") + "```**";
 
         const mods = "**```http\n" + [
@@ -28,23 +28,23 @@ class StatsCommand extends Command {
             `NodeJS    :: ${s.NODE_V}`,
             `OS        :: ${s.OS}`,
             `Library   :: ${s.LIBRARY}`,
-            `Version   :: ${s.LIBRARY_V}`,
+            `Versão    :: ${s.LIBRARY_V}`,
         ].join("\n") + "```**";
 
         const info = "**```http\n" + [
-            `Creator   :: ${s.CREATOR}`,
-            `Modules   :: ${s.MODULES}`,
-            `Commands  :: ${s.COMMANDS}`,
+            `Criador   :: ${s.CREATOR}`,
+            `Modulos   :: ${s.MODULES}`,
+            `Comandos  :: ${s.COMMANDS}`,
             "Website   :: none",
-            "Patreon   :: patreon.com/nitrobot",
-            "PayPal    :: paypal.me/funnbot"
+            //"Patreon   :: patreon.com/nitrobot",
+            //"PayPal    :: paypal.me/funnbot"
         ].join("\n") + "```**";
 
         const embed = new bot.Embed()
             .addField("—— Shards ——", shards, true)
-            .addField("—— Usage ——", mods, true)
-            .addField("—— Environment ——", envir, true)
-            .addField("—— Information ——", info, true)
+            .addField("—— Uso ——", mods, true)
+            .addField("—— Ambiente ——", envir, true)
+            .addField("—— Informação ——", info, true)
             .nitroColor()
         if (message.channel.permissionsFor(bot.user).has("EMBED_LINKS"))
             return reply(embed);
