@@ -14,13 +14,13 @@ class TheSearchCommand extends Command {
         reply(file);
     }
 
-    help = "The search continues meme";
+    help = "O meme da pesquisa continua";
     botPerm = "ATTACH_FILES";
     cooldown = 5;
     arg = {
         type: "string",
-        info: "A stupid idea",
-        example: "Arrays end at 0"
+        info: "Uma ideia estupida",
+        example: "Bolacha de peixe"
     }
 }
 
