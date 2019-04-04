@@ -4,22 +4,22 @@ class KickCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const [member, reason] = message.args;
-        if (!member.kickable) return await reply.fail("I lack permission to kick this user.");
-        if (message.member.roles.highest.position <= member.roles.highest.position) return await reply.fail("You lack permission to kick this user.");
+        if (!member.kickable) return await reply.fail("Não tenho permissões para kickar este utilizador.");
+        if (message.member.roles.highest.position <= member.roles.highest.position) return await reply.fail("Não tens permissões para kickar este utilizador.");
 
-        let txt = `Are you sure you want to kick the user ${member.user.tag}`;
+        let txt = `De certeza de que queres kickar este utilizador ${member.user.tag}`;
         const m = await message.channel.ask(message.author, txt);
         const failsafe = await message.channel.collectMessage(message.author);
-        if (!failsafe) return await m.edit("**Aborted.**", { embed: null });
-        else await m.edit(`**Kicking...**`, { embed: null });
+        if (!failsafe) return await m.edit("**Abortado.**", { embed: null });
+        else await m.edit(`**Kickando...**`, { embed: null });
         try {
             await member.kick({ reason });
         } catch (e) {
-            return await m.edit("**Kick failed**");
+            return await m.edit("**Kick falhou**");
         }
         await message.guild.userAction(member.user.id, "kick", reason);
         await message.guild.modAction(message.author.id, "kick");
-        await m.edit("**User kicked**");
+        await m.edit("**User kickado**");
 
         const modlogID = await message.guild.modlog();
         const modlog = bot.channels.get(modlogID);
@@ -31,17 +31,17 @@ class KickCommand extends Command {
         })
     }
 
-    help = "Kick a member.";
+    help = "Kicka um membro.";
     botPerms = ["KICK_MEMBERS"];
     userPerms = ["KICK_MEMBERS"];
     args = [{
         type: "member",
-        info: "The user to kick.",
+        info: "O utilizador para banir.",
         example: "@Badboy"
     }, {
         type: "string",
-        info: "The reason for kicking.",
-        example: "Because I said so",
+        info: "A razão do kick.",
+        example: "Porque sim",
         default: "unspecified"
     }];
 }
