@@ -3,7 +3,7 @@ server: # REST server
   address: 0.0.0.0
 lavalink:
   server:
-    password: "LAVALINK from auth.js"
+    password: "password"
     ws:
       port: 2333
       host: 0.0.0.0
