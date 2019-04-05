@@ -6,9 +6,9 @@ class AddServerTagCommand extends Command {
         const tags = await message.guild.tags();
         const tagName = message.args[0];
         const tagContent = message.args[1];
-        if (Object.keys(tags) > 100) return await reply.fail("Too many tags on this server!");
-        if (tags[tagName]) return await reply.fail("Tag already exists.");
-        if (tagName.length > 100) return await reply.fail("Tag name is too long.");
+        if (Object.keys(tags) > 100) return await reply.fail("Demasiadas tags neste server!");
+        if (tags[tagName]) return await reply.fail("Tag já existe.");
+        if (tagName.length > 100) return await reply.fail("Nome da tag demasiado longo.");
         tags[tagName] = {
             owner: message.author.id,
             content: tagContent,
@@ -20,17 +20,17 @@ class AddServerTagCommand extends Command {
         return await reply.succ("Added tag");
     }
 
-    help = "Add a server tag.";
-    usage = "{}addservertag steve Hello fellow kids!";
+    help = "Adiciona uma tag ao server.";
+    usage = "{}addservertag algo que não interessa a ninguém!";
     userPerms = ["MANAGE_GUILD"];
     args = [{
         type: "string",
-        info: "The tag name",
-        example: "steve"
+        info: "O nome da tag",
+        example: "algo"
     }, {
         type: "string",
-        info: "The tag content",
-        example: "Hello fellow kids!"
+        info: "O conteudo da tag",
+        example: "que não interessa a ninguém!"
     }];
 }
 
