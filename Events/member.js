@@ -27,7 +27,7 @@ let guildMember = async (member, when) => {
 
     if (ar) assignAutorole(ar, member);
 
-    if (mldm && when) user.send(`**From ${guild.name}:** ${mldm}`).catch(logger.debug);
+    if (mldm && when) user.send(`**De ${guild.name}:** ${mldm}`).catch(logger.debug);
 
     if (!mlchan) return;
     const { msg, type } = when ? mljoin : mlleave;
