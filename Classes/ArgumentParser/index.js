@@ -24,12 +24,12 @@ module.exports = async function(command, message) {
 }
 
 function missing() {
-    return { valid: false, error: "Missing argument.", empty: true }
+    return { valid: false, error: "Argumento inexistente.", empty: true }
 }
 
 function invalidArg(message, command, argIndex = -1, invalidText = false) {
-    let txt = `**Usage:** ${message.prefix}${message.command} `;
-    let ex = `**Example:** \`${message.prefix}${message.command} `;
+    let txt = `**Utilização:** ${message.prefix}${message.command} `;
+    let ex = `**Examplo:** \`${message.prefix}${message.command} `;
     let argInfo = [];
     for (let i = 0; i < command.args.length; i++) {
         let arg = command.args[i];
