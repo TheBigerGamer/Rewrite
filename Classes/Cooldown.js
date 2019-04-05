@@ -6,7 +6,7 @@ class Cooldown {
     run(message, command) {
         let check = this.check(message.author.id, message.command, command.cooldown);
         if (check) {
-            message.channel.send("**Cooldown:** Please wait " + check / 1000 + " seconds before using this command.").then(m => m.delete({ timeout: check }));
+            message.channel.send("**STOP!** Por favor espera " + check / 1000 + " segundos antes de usar este comando.").then(m => m.delete({ timeout: check }));
             return true;
         }
     }
