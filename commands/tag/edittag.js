@@ -7,24 +7,24 @@ class EditTagCommand extends Command {
         const tagName = message.args[0];
         const tagContent = message.args[1];
         const tag = tags[tagName];
-        if (!tag) return await reply.fail("Tag does not exist.");
+        if (!tag) return await reply.fail("Tag não existe.");
         tag.content = tagContent;
         tag.edited = Date.now();
         await message.guild.tags(tags);
-        return await reply.succ("Edited tag.");
+        return await reply.succ("Tag editada.");
     }
 
-    help = "Add a tag";
-    usage = "{}addtag steve Hello fellow kids!";
+    help = "Edita uma tag";
+    usage = "{}edittag info Já não há informação!";
     alias = ["edit-tag", "tagedit"];
     args = [{
         type: "string",
-        info: "The tag name.",
-        example: "steve"
+        info: "O nome da tag.",
+        example: "info"
     }, {
         type: "string",
-        info: "The tag content.",
-        example: "Hello fellow kids!"
+        info: "O conteudo da tag.",
+        example: "Já não há informação!"
     }];
 }
 
