@@ -25,5 +25,5 @@ module.exports = {
 
     BETA: true, // Not used yet
 
-    YTAPITOKEN: "" // google api token
+    YTAPITOKEN: "AIzaSyCJe70PD0TWeUzXfV4mGpjvXDWhJWdu8Yw" // google api token
 }
