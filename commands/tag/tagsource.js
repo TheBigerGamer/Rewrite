@@ -6,17 +6,17 @@ class TagSourceCommand extends Command {
         const tagName = message.args[0];
         const tags = await message.guild.tags();
         const tag = tags[tagName];
-        if (!tag) return await reply.fail("Tag does not exist.");
+        if (!tag) return await reply.fail("Tag não existe.");
         let content = "```\n" + util.escapeMarkdown(tag.content) + "```";
         return await reply(content);
     }
 
-    help = "Get the raw markdown of a tag";
+    help = "Obtém o markdown de uma tag";
     usage = "{}tag info";
     alias = ["t"];
     arg = {
         type: "string",
-        info: "The name of a tag",
+        info: "O nome da tag.",
         example: "info"
     };
 }
