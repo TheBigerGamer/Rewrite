@@ -6,22 +6,22 @@ class SkipToMusicCommand extends Command {
         const [num] = message.args;
 
         const vc = message.member.voiceChannel;
-        if (!vc) return reply.warn("Join a voice channel to run this command.");
+        if (!vc) return reply.warn("Entra num canal de voz para executares este comando.");
 
         const player = bot.player.check(vc);
-        if (!player) return reply.warn("There is no music playing.")
+        if (!player) return reply.warn("Não há musica a tocar.")
 
         if (!player.isDJ(message.author.id, message.channel)) 
-            return reply.warn("You need DJ permissions to run this command.");
+            return reply.warn("Precisas de ser DJ para executares este comando.");
 
         player.skipto(num);
-        return reply.succ("Songs skipped.");
+        return reply.succ("Músicas saltadas.");
     }
 
-    help = "Skip x songs forward.";
+    help = "Salta x músicas.";
     arg = {
         type: "num",
-        info: "The song index to skip to.",
+        info: "O número de músicas para saltar.",
         example: "5",
         min: 1,
         max: 100
