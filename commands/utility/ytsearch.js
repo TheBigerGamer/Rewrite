@@ -5,15 +5,15 @@ class YTSearchCommand extends Command {
     async run({ message, bot, reply, t }) {
         const [input] = message.args;
 
-        try { var url = await search(input); } catch { return reply.warn("Search returned 0 results.") }
+        try { var url = await search(input); } catch { return reply.warn("Procura revelou 0 resultados.") }
         return reply(url);
     }
 
-    help = "Search youtube.";
+    help = "Procura no YouTube.";
     arg = {
         type: "string",
-        info: "Search string",
-        example: "the cinnamon challenge",
+        info: "Frase da procura",
+        example: "wuant",
     }
 }
 
