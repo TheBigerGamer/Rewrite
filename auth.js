@@ -14,7 +14,7 @@ module.exports = {
 
     SHARDS: 4, // Dosnt seem to do anything
 
-    LAVALINK: "", // Lavalink password defined in application.yaml
+    LAVALINK: "password", // Lavalink password defined in application.yaml
 
     LISTS: { // Just ignore
         botsdiscordpw: "",
