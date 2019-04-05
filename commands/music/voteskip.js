@@ -4,20 +4,20 @@ class VoteSkipCommand extends Command {
 
     async run({ message, bot, reply, t }) {
         const vc = message.member.voiceChannel;
-        if (!vc) return reply.warn("Join a voice channel to run this command.");
+        if (!vc) return reply.warn("Entra num canal de voz para executares este comando.");
 
         const player = bot.player.check(vc);
-        if (!player) return reply.warn("There is no music playing.")
+        if (!player) return reply.warn("Não há música a tocar.")
 
         if (message.guild.cache.exists("voteskip")) return;
         message.guild.cache.set("voteskip");
 
         const botVC = message.guild.me.voiceChannel;
-        if (!botVC) return reply("The bot is not in a voice channel.");
+        if (!botVC) return reply("O bot não está no canal de voz.");
         const listenting = botVC.members.size;
         if (listenting <= 2) {
             player.skip();
-            return reply.succ("Song skipped.");
+            return reply.succ("Música saltada.");
         }
 
         if (message.guild.cache.exists("voteskip")) return;
@@ -36,17 +36,17 @@ class VoteSkipCommand extends Command {
             if (voted.length >= needed) {
                 collector.stop();
                 player.skip();
-                m.channel.send("**Song skipped**");
-            } else m.channel.send(`**${voted.length}/${needed} voted required to skip this song.**`)
+                m.channel.send("**Música saltada**");
+            } else m.channel.send(`**${voted.length}/${needed} votos necessários para saltar esta música.**`)
         })
 
         collector.on("end", r => {
             if (r === "time")
-                message.channel.send("**Vote skip failed.**")
+                message.channel.send("**Avanço por votação falhou.**")
         })
     }
 
-    help = "Vote to skip the current song.";
+    help = "Vota para saltar a música atual.";
 }
 
 module.exports = VoteSkipCommand;
