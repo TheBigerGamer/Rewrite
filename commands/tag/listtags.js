@@ -12,14 +12,14 @@ class ListTagsCommand extends Command {
         }
 
         const embed = bot.embed
-            .addFieldDef("> Server Tags", util.shorten2000(ts.join(", ")))
-            .addFieldDef("> Owned Tags", util.shorten2000(to.join(", ")))
+            .addFieldDef("> Tags do server", util.shorten2000(ts.join(", ")))
+            .addFieldDef("> Tags possuídas", util.shorten2000(to.join(", ")))
             .nitroColor();
 
         return await reply(embed);
     }
 
-    help = "List the tags on this server.";
+    help = "Mostra as tags neste servidor.";
     alias = "tags";
 }
 
