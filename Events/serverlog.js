@@ -9,10 +9,10 @@ bot.on("channelCreate", async channel => {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Channel Create")
+        .setTitle("Canal criado")
         .setAuthor(channel.guild.name, channel.guild.iconURL())
-        .addBetterField("Channel", channel)
-        .addBetterField("Type", channel.type)
+        .addBetterField("Canal", channel)
+        .addBetterField("Tipo", channel.type)
 
     return send(embed, ml);
 })
@@ -24,9 +24,9 @@ bot.on("channelDelete", async channel => {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Channel Delete")
+        .setTitle("Canal eliminado")
         .setAuthor(channel.guild.name, channel.guild.iconURL())
-        .addBetterField("Channel", channel.name)
+        .addBetterField("Canal", channel.name)
 
     return send(embed, ml);
 })
@@ -44,11 +44,11 @@ async function channelUpdateTopic(old, channel) {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Channel Topic Update")
+        .setTitle("Tópico do canal alterado")
         .setAuthor(channel.guild.name, channel.guild.iconURL())
-        .addBetterField("Channel", channel)
+        .addBetterField("Canal", channel)
         .addBetterField("Original", old.topic, true)
-        .addBetterField("Edited", channel.topic);
+        .addBetterField("Editado", channel.topic);
 
     return send(embed, ml);
 }
@@ -59,9 +59,9 @@ async function channelUpdateName(old, channel) {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Channel Name Update")
+        .setTitle("Nome do canal alterado")
         .setAuthor(channel.guild.name, channel.guild.iconURL())
-        .addBetterField("Channel", channel)
+        .addBetterField("Canal", channel)
         .addBetterField("Original", old.name, true);
 
     return send(embed, ml);
@@ -75,10 +75,10 @@ bot.on("messageDeleteBulk", async messages => {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Message Bulk Delete")
+        .setTitle("Purga efetuada")
         .setAuthor(m.guild.name, m.guild.iconURL())
-        .addBetterField("Channel", m.channel)
-        .addBetterField("Count", messages.size, true)
+        .addBetterField("Canal", m.channel)
+        .addBetterField("Número", messages.size, true)
 
     return send(embed, ml);
 })
@@ -90,10 +90,10 @@ bot.on("messageDelete", async message => {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Message Delete")
+        .setTitle("Mensagem eliminada")
         .setAuthor(message.author.username, message.author.displayAvatarURL())
-        .addBetterField("Channel", message.channel)
-        .addBetterField("Content", message.content.substr(0, 900), true);
+        .addBetterField("Canal", message.channel)
+        .addBetterField("Conteúdo", message.content.substr(0, 900), true);
 
     let atts = attachs(message);
     if (atts) embed.addBetterField("Attachments", atts)
@@ -109,11 +109,11 @@ bot.modlog.on("messageEdit", async (oldMessage, message) => {
     if (!ml) return;
 
     const embed = bot.embed
-        .setTitle("Message Edit")
+        .setTitle("Mensagen editada")
         .setAuthor(message.author.username, message.author.displayAvatarURL())
-        .addBetterField("Channel", message.channel)
+        .addBetterField("Canal", message.channel)
         .addBetterField("Original", oldMessage.content.substr(0, 900), true)
-        .addBetterField("Edited", message.content.substr(0, 900))
+        .addBetterField("Editada", message.content.substr(0, 900))
 
     let atts = attachs(message);
     if (atts) embed.addBetterField("Attachments", atts);
