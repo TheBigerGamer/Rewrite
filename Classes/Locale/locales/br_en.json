@@ -1,10 +1,10 @@
 {
     "LANG": "br_en",
 
-    "PING_TEST": "Testing ping with a cup of tea...",
-    "PING_DONE": "**Pong! Oops! I spilled my tea** Latency: {}MS Websocket: {}MS.",
+    "PING_TEST": "Testando o ping com uma chávena de chá :tea:...",
+    "PING_DONE": "**Pong! Ups! Entornei o meu chá :tea:** Latência: {}MS Websocket: {}MS.",
 
-    "SETLANG_LIST": "Here are the available locales:\n${1}",
-    "SETLANG_SET": "Locale set to: `{}`.",
-    "SETLANG_INVALID": "The locale `{}` does not exist."
+    "SETLANG_LIST": "Aqui estão alguns locales disponíveis:\n${1}",
+    "SETLANG_SET": "Locale definido para: `{}`.",
+    "SETLANG_INVALID": "O locale `{}` não existe."
 }
