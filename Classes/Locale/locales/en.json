@@ -2,10 +2,10 @@
     "LANG": "en",
 
     
-    "PING_TEST": "Testing ping...",
-    "PING_DONE": "**Pong!** Latency: {} MS Websocket: {} MS.",
+    "PING_TEST": "Testando ping...",
+    "PING_DONE": "**Pong!** Latência: {} MS Websocket: {} MS.",
 
-    "SETLANG_LIST": "Here are the available locales:\n{}",
-    "SETLANG_SET": "Locale set to: `{}`.",
-    "SETLANG_INVALID": "The locale `{}` does not exist."
+    "SETLANG_LIST": "Aqui estão os locales disponíveis:\n{}",
+    "SETLANG_SET": "Locale definido para: `{}`.",
+    "SETLANG_INVALID": "O locale `{}` não existe."
 }
