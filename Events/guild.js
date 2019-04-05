@@ -4,10 +4,10 @@ const bot = require("../bot.js");
 const { carbonitex, discordbots } = require("../config.js");
 
 const embed = bot.embed
-embed.setTitle("So, you invited Nitro...")
-    .addField("Getting Started", "Get the commands with `n!help`")
-    .addField("Support Server", "https://discord.gg/aZ2PYhn")
-    .setFooter("Hello")
+embed.setTitle("Emtão tu convidas-te o Warlock...")
+    .addField("Primeiros passos", "Obtém os comandos com `//help`")
+    .addField("Server de Suporte", "https://discord.gg/zK9C66T")
+    .setFooter("Olá")
     .setTimestamp(new Date())
     .nitroColor();
 
