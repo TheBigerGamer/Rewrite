@@ -59,7 +59,7 @@ class ConsistentTimer {
 
     async remind(timer) {
         const mem = await this.bot.users.fetch(timer.id)
-        mem.send("Here's your reminder: " + timer.msg).catch(logger.debug);
+        mem.send("Aqui está o teu lembrete: " + timer.msg).catch(logger.debug);
     }
 
     // TODO: make member join check this list to add muted.
