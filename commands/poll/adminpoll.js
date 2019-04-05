@@ -3,15 +3,15 @@ const { Command, TIME } = require("../../Nitro");
 class AdminPollCommand extends Command {
 
     async run({ message, bot, reply, t }) {
-        if (message.guild.cache.exists("apoll")) return reply("**There is already an admin poll running.**");
+        if (message.guild.cache.exists("apoll")) return reply("**Já há uma votação a decorrer.**");
         const [display, voting, time, opts] = message.args;
 
-        if (!display.hasSendPerms) return reply(`**I lack permission to send messages in the channel ${display}.**`);
-        if (!voting.hasSendPerms) return reply(`**I lack permission to send messages in the channel ${voting}.**`);
+        if (!display.hasSendPerms) return reply(`**Preciso de permissões para mandar mensagens em ${display}.**`);
+        if (!voting.hasSendPerms) return reply(`**Preciso de permissões para mandar mensagens em ${voting}.**`);
 
         let split = opts.split("|");
-        if (!split[0]) return reply("**Split your options with the character `|`**");
-        if (split.length <= 2) return reply("**You must have at least 2 options**");
+        if (!split[0]) return reply("**Separa as tas opções com `|`**");
+        if (split.length <= 2) return reply("**Tens de ter pelo menos duas opções.**");
         let quest = split[0];
         split = split.slice(1).map(t => t.trim());
         let options = split.map(t => ({ content: t, votes: 0 }));
@@ -25,12 +25,12 @@ class AdminPollCommand extends Command {
 
         message.guild.cache.set("apoll");
         message.author.cache.deleteAll("apoll");
-        reply(`**Respond with \`endpoll\` in ${voting} to end the poll early.**`)
+        reply(`**Responde com \`endpoll\` em ${voting} para terminar a votação mais rápido.**`)
         display.send(`**__${quest}__**
 
 ${split.map((t, i) => `**${i+1}. ${t}**`).join("\n")}
 
-You can vote with \`${message.prefix}vote <option number>\` in the voting channel ${voting}`);
+Pode votar com \`${message.prefix}vote <option number>\` em ${voting}`);
 
         let collector = voting.createMessageCollector(m => m.author.bot !== true, {
             time: time.milliseconds()
@@ -43,20 +43,20 @@ You can vote with \`${message.prefix}vote <option number>\` in the voting channe
             }
             if (!msg.content.startsWith(message.prefix + "vote")) return;
             if (msg.author.cache.exists("apoll")) 
-                return msg.channel.send("**You have already voted**").then(m => m.delete(14000))
+                return msg.channel.send("**Já votaste**").then(m => m.delete(14000))
             let num = parseInt(msg.content.split(/\s+/g)[1]) || "invalid";
             if (num === "invalid" || num <= 0 || num > poll.options.length)
-                return msg.channel.send("**Invalid option number**");
+                return msg.channel.send("**Número de opção inválido**");
             msg.delete();
             poll.options[num - 1].votes++;
             poll.total++;
-            msg.channel.send("**Vote Collected**").then(m => m.delete(14000));
+            msg.channel.send("**Voto coletado**").then(m => m.delete(14000));
             msg.author.cache.set("apoll");
         })
 
         collector.on("end", () => {
             message.guild.cache.delete("apoll");
-            if (poll.total === 0) return display.send("**Poll Results:**\nNobody Voted");
+            if (poll.total === 0) return display.send("**Resultado da votação:**\nNinguém votou");
             let top = poll.options.sort((a, b) => {
                 return b.votes - a.votes;
             })
@@ -66,8 +66,8 @@ You can vote with \`${message.prefix}vote <option number>\` in the voting channe
             top.forEach(t => {
                 if (t.votes === topValue) star.push(t), under = under.slice(1);
             })
-            let txt = `**Poll Results:**
-Total Votes: ${poll.total}
+            let txt = `**Resultados da votação:**
+Votos totais: ${poll.total}
 
 **__${poll.quest}__**
 
@@ -78,27 +78,27 @@ ${under.map(t => `**${t.content}: ** \`${t.votes}\``).join("\n")}`;
         })
     }
 
-    help = "Create a poll with seperate display and voting channels.";
+    help = "Cria uma votação com um canal de display e votação separados.";
     userPerm = "MANAGE_GUILD";
     alias = "apoll";
     args = [{
         type: "channel",
-        info: "The display channel of the poll.",
-        example: "#announcments"
+        info: "O canal de display da votação.",
+        example: "#avisos"
     }, {
         type: "channel",
-        info: "The voting channel for the poll.",
+        info: "O canal de votação para a votação.",
         example: "#spam"
     }, {
         type: "duration",
-        info: "The length of the poll.",
+        info: "A duração da votação.",
         example: "3h30m",
         max: TIME.day,
         min: TIME.minute * 5
     }, {
         type: "string",
-        info: "The question and options seperated by a `|`",
-        example: "Who is the best? | Michael Jackson | Bob the builder | Tom"
+        info: "A questão e as opções separadas por `|`",
+        example: "Quem é o melhor? | Michael Jackson | Freddy Mercury | Madona"
     }]
 }
 
