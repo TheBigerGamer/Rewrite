@@ -5,21 +5,21 @@ class DiscrimCommand extends Command {
         const [input] = message.args;
         const disc = input.replace(/[^0123456789]/g, "");
         if (disc.length !== 4) {
-            return reply.warn("Discriminators are 4 numbers");
+            return reply.warn("Discriminadores são 4 números");
         }
         const req = `this.users.filter(u => u.discriminator === "${disc}").map(u => u.username)`
         const res = await bot.shard.broadcastEval(req);
 
         const users = [].concat(...res);
-        const txt = `**Users with the discriminator: ${disc}**\n${escapeMarkdown(users.join(", "))}`;
+        const txt = `**Utilizadores com o discriminador: ${disc}**\n${escapeMarkdown(users.join(", "))}`;
         return reply(txt.shorten());
     }
 
-    help = "Search for a user by their discriminator";
+    help = "Procura um utilizador pelo seu discriminador.";
     cooldown = 5;
     arg = {
         type: "string",
-        info: "Discriminator",
+        info: "Discriminador",
         example: "5645",
     }
 }
